@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Returning Multiple Values from a {\PROC}s}
+\problem
+You want to modify multiple values in a single \PROC.
+
+\solution
+When you pass a variable to a \PROC, the \PROC is allowed to modify it. You can pass more than one value that you would like to have modified.
+
+\lstinputlisting[caption=A \PROC that modifies two variables.,label=ch1:code:modify]{ch1/code/modify-two.occ}
+
+\discussion
+In the \PROC {\code increment.both}, we take in two parameters of type \INT ({\code a} and {\code b}), and we increment them both in \PARallel. Because neither variable is dependent on the other, we can actually ask \occam to increment both. 
+
+On line 10 we declare the variables {\code p1} and {\code p2}, and initialize them to the values {\constant 11} and {\constant 12}, respectively. On line 12 those are passed to {\code increment.both} (which updates the two variables in parallel), and then those two values are used in two {\code blink} processes which proceed to execute for the rest of time.
+
+The most interesting thing about this code might be lines 4--7; specifically that doing something in \PARallel does not necessarily mean you are doing to do it forever. A \PAR comes to an end when every one of the processes under it comes to an end. Because neither assignment statement runs forever (e.g. a \WHILETRUE loop), the \PAR will exit, and the code we are running in {\code main} will continue.
+
+\makingthingsbreak
+
+\XXX
+
+\seealso
+
+\XXX

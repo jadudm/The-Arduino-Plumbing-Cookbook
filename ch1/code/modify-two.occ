@@ -1,0 +1,16 @@
+#INCLUDE "plumbing.module"
+
+PROC increment.both (INT a, b)
+  PAR
+    a := a + 1
+    b := b + 1
+:
+
+PROC main ()
+  INITIAL INT p1, p2 IS 11, 12:
+  SEQ
+    increment.both (p1, p2)
+    PAR
+      blink (p1, 300)
+      blink (p2, 500)
+:

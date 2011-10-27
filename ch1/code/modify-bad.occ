@@ -1,0 +1,17 @@
+#INCLUDE "plumbing.module"
+
+PROC add.one (INT v)
+  v := v + 1
+:
+
+PROC main ()
+  INITIAL INT pin IS 11:
+  PAR
+    SEQ
+      add.one (pin)
+      blink (pin, 500)
+    SEQ
+      add.one (pin)
+      add.one (pin)
+      blink (pin, 500)
+:

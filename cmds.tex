@@ -93,11 +93,11 @@
 % Definition for typesetting occam source code
 \lstdefinelanguage{occam} 
 {
-	keywords={PROC,PAR,SEQ,WHILE,ALT,CHAN,LEVEL},
+	keywords={PROC,PAR,SEQ,WHILE,ALT,CHAN,LEVEL,INITIAL,IS},
 	keywordstyle=\color{Keyword}\bfseries,
 	emph={TRUE, FALSE, LOW, HIGH, OUTPUT, INPUT}, %SIGNAL?
 	emphstyle=\color{Constant}\bfseries, 
-	emph={[2]INT, BYTE}, %SIGNAL?
+	emph={[2]INT, BYTE, VAL, INT}, %SIGNAL?
 	emphstyle={[2]\color{Type}},
 	sensitive=true,
 	comment=[l]{--},

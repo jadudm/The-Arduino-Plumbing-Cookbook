@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Returning Values from {\PROC}s}
+\problem
+You have an operation you would like to do multiple times, so a \PROC seems like the right way to reuse code. However, you want to return a value from that \PROC.
+
+\solution
+When you pass a variable to a \PROC, the \PROC is allowed to modify it. So, instead of returning a value, we simply pass a variable to the \PROC that it modifies.
+
+\lstinputlisting[caption=A \PROC that modifies a variable.,label=ch1:code:modify]{ch1/code/modify.occ}
+
+\discussion
+On line 3, we define a \PROC that consumes a variable called {\code v}. Note that it is not a \VALINT, but it is just an \INT. \VALINT means it is a constant (and we therefore cannot modify it); when we declare a parameter to be of type \INT (or \BOOL, or \BYTE), we mean that the value we are passing is a variable that can be modified. The body of this \PROC increments the value of the integer passed in by one.
+
+On line 8, we declare the variable {\code pin} to be of type \INT, and we initialize it to 12. We then do two things in sequence (lines 10, 11): first, we pass the variable to {\code add.one}, which increments the value of {\code pin}, and then we use that value in a call to {\code blink}, which runs forever. (Because this comes at the end of a \SEQ, the program never exits.)
+
+You can't always do this. You can \emph{most} of the time, but not \emph{always}.
+
+When you are working in \SEQuence, the compiler will let you do this. However, the above code would fail if we tried to do something like the following:
+
+\lstinputlisting[caption=This fails a parallel usage check.,label=ch1:code:modify]{ch1/code/modify-bad.occ}
+
+This code has a problem that is unique to \occam (at least compared to C++). In \PARallel, we are doing two things: on lines 10, 11, and 12 we are incrementing the value of {\code pin} and then blinking \pintwelve. On lines 13--16, we are incrementing {\code pin} twice, and then blinking \pinthirteen.
+
+While we might think this could work (because we are doing two {\SEQ}uences of operations in {\PAR}allel), we can't. Specifically, the \occam compiler will not let us modify the value of {\code pin} in \PARallel. Specifically, we have two different processes that are attempting to increment the value of {\code pin}. 
+
+\begin{description}
+	\item[First \SEQ first.] If the first \SEQ executes first, then we will be attempting to blink pin {\constant 12} and pin {\constant 14}. This is because we first do one increment (taking us from {\constant 11} to {\constant 12}), and then we do two more, taking us to {\constant 14}.
+	\item[Second \SEQ first.] If the second \SEQ executes first, then we will be attempting to blink pin {\constant 13} (because we increment {\constant 11} twice), and then we execute the first \SEQ, which attempts to blink pin {\constant 14}. 
+\end{description}
+
+In either case, the compiler doesn't like \emph{race hazards}. Specifically, that's where two processes executing in parallel attempt to modify the same value. We call it a ``race hazard'' because it is a race: in this case, depending on which process modifies the value of {\code pin} first will determine whether we are attempting to blink pins {\constant 12} and {\constant 14} or pins {\constant 13} and {\constant 14}. In either case, there is no pin {\constant 14}, so this program is a bad scene no matter what.
+
+The fact that the \occam compiler prevents you from doing this is just one of the many ways it helps make sure your parallel programs are (reasonably) correct before you attempt to run them on the Arduino.
+
+\makingthingsbreak
+
+\XXX
+
+\seealso
+
+\XXX

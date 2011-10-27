@@ -58,7 +58,7 @@ PROC main ()
 \discussion
 In C++, you write functions to organize your code into small, manageable pieces. (This is also how we often reuse parts of our code.) In \occam, we typically use the \PROC for the same purpose. A \PROC allows us to gather up one or more lines of code and give those lines of code a name. In this case, we took the infinite loop that was blinking pin \pinthirteen, and put it in a \PROC that we could reference by name.
 
-The second change we made was to add a parameter to the \PROC. This way, when we use the \PROC, we can choose how long to leave the LED on and off at the time of usage, instead of it being ``hard coded'' into the \PROC {\code blink.loop}. This also illustrates an interesting thing about \occam parameters: if we want to pass a constant value (that cannot be changed), we say \VAL. So, in the parameters to {\code blink.loop} we have one parameter of type \VAL \INT, which means that we are passing a constant of some sort to {\code blink.loop}.
+The second change we made was to add a parameter to the \PROC. This way, when we use the \PROC, we can choose how long to leave the LED on and off at the time of usage, instead of it being ``hard coded'' into the \PROC ~ {\code blink.loop}. This also illustrates an interesting thing about \occam parameters: if we want to pass a constant value (that cannot be changed), we say \VAL. So, in the parameters to {\code blink.loop} we have one parameter of type \VALINT, which means that we are passing a constant of some sort to {\code blink.loop}.
 
 \makingthingsbreak
 \begin{itemize}
