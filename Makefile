@@ -14,5 +14,10 @@ clean:
 	rm -f *.aux
 	rm -f *.log
 	rm -f *.bbl
+	rm -f *.err
+	rm -f *.out
+	rm -f *.toc
+	rm -f *.py
+	rm -f *~
 	rm -f ${TEXSRC}.pdf
 	rm -f ${BOOKPDF}.pdf
