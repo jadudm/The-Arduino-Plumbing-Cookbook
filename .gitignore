@@ -1,0 +1,34 @@
+*.out
+*.toc
+*.aux
+*.log
+*~
+
+# Specific files
+book.pdf
+20100111-plumbing-book.pdf
+book.py
+book.py.err
+latex.py
+plumbing-for-the-arduino.pdf
+
+# Specific directories
+packages
+.DS_Store
+
+# Generated files (network diagrams)
+network-diagrams/graffle.s*
+network-diagrams/*-print.pdf
+network-diagrams/*-screen.png
+
+# Generated files (new diagrams)
+new-diagrams/graffle.s*
+new-diagrams/*-print.pdf
+new-diagrams/*-screen.png
+
+# new things from the cookbook transition
+Makefile~
+plumbing-for-arduino.pdf
+plumbing-for-arduino.py
+plumbing-for-arduino.py.err
+

@@ -1,0 +1,193 @@
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+ \definecolor{Comment}{rgb}{0.4,0.2,0.6} % Purple
+ \definecolor{Keyword}{cmyk}{0.64,0,0.95,0.40} % Green
+ %\definecolor{Constant}{cmyk}{0.62,0.57,0.23,0} % Cadet Blue
+ \definecolor{Type}{rgb}{0.9,0.3,0.3} % Pink
+ \definecolor{Constant}{rgb}{0.2,0.2,0.9} % Blue
+ \definecolor{DANGER}{rgb}{0.9,0.0,0.0} % Blue
+
+\newcommand{\plumbing}{Plumbing\xspace}
+
+\newcommand{\XXX}{{\em TO BE WRITTEN}\xspace}
+\newcommand{\FIXME}{\emph{FIXME}\xspace}
+
+\newcommand{\GOALS}{\section{Goals}}
+\newcommand{\CODE}{\section{Code}}
+\newcommand{\CIRCUIT}{\section{Building the Circuit}}
+\newcommand{\PATTERNS}{\section{Patterns}}
+\newcommand{\BREAKAGE}{\section{Breakage}}
+\newcommand{\EXPLORATIONS}{\subsection{Explorations}}
+
+\newcommand{\code}{\ttfamily}
+\newcommand{\constant}{\ttfamily\bfseries\color{Constant}}
+\newcommand{\procname}{\ttfamily}
+\newcommand{\channel}{\ttfamily}
+\newcommand{\keyword}{\ttfamily\bfseries\color{Keyword}}
+\newcommand{\type}{\ttfamily\bfseries\color{Type}}
+
+\newcommand{\PROCedure}{{\keyword PROC}edure\xspace}
+\newcommand{\PROC}{{\keyword PROC}\xspace}
+\newcommand{\PARallel}{{\keyword PAR}allel\xspace}
+\newcommand{\SEQuence}{{\keyword SEQ}uence\xspace}
+\newcommand{\PAR}{{\keyword PAR}\xspace}
+\newcommand{\SEQ}{{\keyword SEQ}\xspace}
+\newcommand{\CHANnel}{{\keyword CHAN}nel\xspace}
+\newcommand{\CHAN}{{\keyword CHAN}\xspace}
+\newcommand{\RECORD}{{\keyword RECORD}\xspace}
+
+\newcommand{\VALue}{{\keyword VAL}ue\xspace}
+\newcommand{\VAL}{{\keyword VAL}\xspace}
+
+\newcommand{\BOOL}{{\type BOOL}\xspace}
+\newcommand{\VALINT}{{\type VAL INT}\xspace}
+\newcommand{\INTeger}{{\type INT}eger\xspace}
+\newcommand{\BYTE}{{\type BYTE}\xspace}
+\newcommand{\INT}{{\type INT}\xspace}
+\newcommand{\INTTT}{{\type INT32}\xspace}
+\newcommand{\REALTT}{{\type REAL32}\xspace}
+
+\newcommand{\SIGNALT}{{\type SIGNAL}\xspace}
+\newcommand{\SIGNALV}{{\constant SIGNAL}\xspace}
+
+\newcommand{\LEVELT}{{\type LEVEL}\xspace}
+\newcommand{\HIGH}{{\constant HIGH}\xspace}
+\newcommand{\LOW}{{\constant LOW}\xspace}
+\newcommand{\OUTPUT}{{\constant OUTPUT}\xspace}
+\newcommand{\INPUT}{{\constant INPUT}\xspace}
+
+\newcommand{\TRUE}{{\constant TRUE}\xspace}
+\newcommand{\FALSE}{{\constant FALSE}\xspace}
+
+\newcommand{\WHILETRUE}{{\keyword WHILE}~{\constant TRUE}\xspace}
+
+\newcommand{\ohm}{$\tcohm$\xspace}
+
+\newcommand{\pinone}{{\constant 1}\xspace}
+\newcommand{\pintwo}{{\constant 2}\xspace}
+\newcommand{\pinthree}{{\constant 3}\xspace}
+\newcommand{\pinfour}{{\constant 4}\xspace}
+\newcommand{\pinfive}{{\constant 5}\xspace}
+\newcommand{\pinsix}{{\constant 6}\xspace}
+\newcommand{\pinseven}{{\constant 7}\xspace}
+\newcommand{\pineight}{{\constant 8}\xspace}
+\newcommand{\pinnine}{{\constant 9}\xspace}
+\newcommand{\pinten}{{\constant 10}\xspace}
+\newcommand{\pineleven}{{\constant 11}\xspace}
+\newcommand{\pintwelve}{{\constant 12}\xspace}
+\newcommand{\pinthirteen}{{\constant 13}\xspace}
+
+
+\newcommand{\problem}{\subsection*{Problem}}
+\newcommand{\solution}{\subsection*{Solution}}
+\newcommand{\discussion}{\subsection*{Discussion}}
+\newcommand{\makingthingsbreak}{\subsection*{Making Things Break}}
+\newcommand{\seealso}{\subsection*{See Also}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for layout/controlling common structures in the text.
+\newcommand{\webnote}[2]{\footnote{See \url{#1}\xspace for more information about #2.}}
+ 
+% Definition for typesetting occam source code
+\lstdefinelanguage{occam} 
+{
+	keywords={PROC,PAR,SEQ,WHILE,ALT,CHAN,LEVEL},
+	keywordstyle=\color{Keyword}\bfseries,
+	emph={TRUE, FALSE, LOW, HIGH, OUTPUT, INPUT}, %SIGNAL?
+	emphstyle=\color{Constant}\bfseries, 
+	emph={[2]INT, BYTE}, %SIGNAL?
+	emphstyle={[2]\color{Type}},
+	sensitive=true,
+	comment=[l]{--},
+	string=[b]",
+	frame=ltrb,
+	framesep=5pt,
+  commentstyle=\color{Comment},
+  % stringstyle=\ttfamily,
+  showstringspaces=true
+}
+
+\parskip 2mm
+
+
+% Layout of source code in general                                    
+% Should we use pcr or cmtt for the font? lcmtt? txtt? cmvtt
+\lstset{xleftmargin=14pt,basicstyle=\fontfamily{txtt}\selectfont\footnotesize,captionpos=b,numbers=left,numbersep=10pt,language=occam}
+
+\renewcommand\lstlistingname{Figure}
+
+\newcommand{\mypi}{$\pi$}
+\newcommand{\myPI}{\large$\pi$}
+\newcommand{\occam}{{\fontfamily{phv}\selectfont occam-\myPI}\xspace}
+\newcommand{\occamone}{{\fontfamily{phv}\selectfont occam1}\xspace}
+\newcommand{\justoccam}{{\fontfamily{phv}\selectfont occam}\xspace}
+\newcommand{\loccam}{{\fontfamily{phv}\selectfont loccam}}
+\newcommand{\inmos}{{\fontfamily{phv}\selectfont inmos}\xspace}
+
+%\newcommand{\kroc}{{\fontfamily{phv}\selectfont soccam}}
+\def\kroc{KR{\sffamily o}C\xspace} 
+\newcommand{\tvm}{Transterpreter\xspace}
+\newcommand{\Tvm}{Transterpreter\xspace}
+
+
+\newcommand{\tvmurl}{\url{www.transterpreter.org}\xspace}
+\newcommand{\tvmcite}{\cite{transterpreter}}
+
+\newcommand{\ccc}{\url{www.concurrency.cc}\xspace}
+
+\newcommand{\occplug}{occPlug\xspace}
+
+\newcommand{\strong}{\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Process names
+\newcommand{\heartbeat}{{\procname heartbeat}\xspace}
+\newcommand{\blink}{{\procname blink}\xspace}
+\newcommand{\tp}{{\procname pin.toggle}\xspace}
+\newcommand{\bp}{{\procname button.press}\xspace}
+\newcommand{\toggle}{{\procname toggle}\xspace}
+\newcommand{\digo}{{\procname digital.output}\xspace}
+\newcommand{\il}{{\procname invert.level}\xspace}
+\newcommand{\tick}{{\procname tick}\xspace}
+\newcommand{\pinlevel}{{\procname pin.level}\xspace}
+\newcommand{\pwms}{{\procname pwm.simple}\xspace}
+\newcommand{\bA}{{\procname beginAnalog}\xspace}
+\newcommand{\aW}{{\procname analogWrite}\xspace}
+
+% For cover page
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Drawing Resistors
+\newcommand{\resistor}[3]{\colorbox{#1}{ }\colorbox{#2}{ }\colorbox{#3}{ }\colorbox{Goldenrod}{ }\xspace}
+
+% WARNING BOX
+\newenvironment{warning}
+  {\par\begin{mdframed}[linewidth=2pt,linecolor=red]%
+    \begin{list}{}{\leftmargin=1cm
+                   \labelwidth=\leftmargin}\item[\Large\color{DANGER}\ding{43}]}
+  {\end{list}\end{mdframed}\par}
+
+
+
+% I'm really unclear regarding left/right on this document.
+% I feel like I should have a bigger gutter, but it looks like
+% it pushes content *closer* to the gutter. This is wrong.
+
+%\usepackage{fancyhdr}
+%\setlength{\headheight}{15pt}
+ 
+%\pagestyle{fancy}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+ 
+%\fancyhf{}
+%\fancyhead[LE,RO]{\thepage}
+%\fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
+%\fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
+ 
+%\fancypagestyle{plain}{ %
+%\fancyhf{} % remove everything
+%\renewcommand{\headrulewidth}{0pt} % remove lines as well
+%\renewcommand{\footrulewidth}{0pt}}

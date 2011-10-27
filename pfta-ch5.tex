@@ -1,0 +1,65 @@
+While the Arduino looks imposing to many (``It doesn't have a screen!''), it is actually a very simple computer. It has the ability to read digital input (whereby we can ascertain if something is on or off), read analog input (where we can tell if something is between 0V and 5V), and it can also ``write'' these same values.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reading Analog Values}
+\problem
+You want to read a value from an analog pin. For example, you may be reading from a 5V accelerometer so you can make a WiiMote out of an Arduino.
+
+\solution
+There are two ways to read from an analog pin. The first is {\SEQ}uential in nature, and the second is how we interact with an analog pin in a manner that is process-oriented and, in truth, safe when we are combining lots of parallel processes.
+
+A sequential solution to reading and displaying a value from analog pin 0 would look like this:
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+PROC main ()
+  WHILE TRUE
+    INT reading:
+    SEQ
+      adc.base (A0, VCC, reading)
+      serial.write.int (TX0, reading)
+      delay (500)
+:
+\end{lstlisting}
+
+A more process-oriented solution would look like the following.
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+PROC main ()
+  CHAN SIGNAL req:
+  CHAN INT resp:
+  PAR
+    adc (A0, VCC, req?, resp!)
+    INT reading:
+    WHILE TRUE
+      SEQ
+        req ! SIGNAL
+        resp ? reading
+        serial.write.int (TX0, reading)
+        delay (500)
+:
+\end{lstlisting}
+
+\discussion
+The first piece of code shown in this section ``gets the job done.'' It declares a variable called {\code reading} (line 5), and it invokes {\code adc.base} (line 7) once every 500ms to place a value into that variable. In this program, we are reading from pin {\constant A0}, and we are using 5V (or {\constant VCC}) as our reference voltage. This is a good choice when you are using a 5V sensor or a potentiometer (or slider, or some other variable resistor) wired from +5V to ground.
+
+There is one big problem with this first program: it does not {\em compose} well. That is, we cannot easily extend it to include other processes that might want the value from {\constant A0}. While each process could do its own reading from {\constant A0}, this would be fundamentally unsafe, as it would involve multiple {\PROC}s reading from one piece of hardware in \PARallel. 
+
+The second program is more process-oriented in design. Here, we use {\code adc}, which is a parallel-safe \PROC that lets us request readings from the analog to digital converter for a single pin (using the \SIGNALT channel {\code req}), and then a single reading is communicated back to us over the response channel {\code resp}. This is \emph{safe} because it is impossible for more than one \PROC to hold the sending end of {\code req} and the receiving end of {\code resp}.
+
+This code illustrates what we call a \emph{client-server pattern}. The {\code adc} process is the server; the code we wrote in lines 9--14 is the client. The client sends a \SIGNALV to the server indicating that a reading is desired (line 11), and then the client waits until a value is communicated back (line 12). Once the value is received, it is sent to the serial port (perhaps to be displayed on the display of an attached PC), and then we wait 500ms before sending another request down the {\code req} channel.
+
+This may seem like a lot of effort to do a reading on pin {\constant A0}. That said, we could now transmit this value down another channel (or multiple channels) and use the value in one or more ways. This is especially useful in robotics and interactive art pieces, where you want to conceive of doing a reading (in one part of your program) and then processing that value in different ways to produce different outputs---perhaps by scaling the reading to the range 0--255 to control a servo in parallel with another part of the program that decides if a threshold has been crossed to turn an LED on or off.
+
+\makingthingsbreak
+
+\XXX
+
+\seealso
+
+\XXX
