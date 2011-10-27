@@ -2,8 +2,8 @@ TEXSRC=plumbing-cookbook
 BOOKPDF=plumbing-cookbook
 DEST=/data/www/cc/concurrency/www/site/pdf/${BOOKPDF}
 all:
-	pdflatex -shell-escape ${TEXSRC}.tex
-	pdflatex -shell-escape ${TEXSRC}.tex
+	pdflatex ${TEXSRC}.tex
+	pdflatex ${TEXSRC}.tex
 
 upload:
 	cp ${TEXSRC}.pdf ${BOOKPDF}-`date +"%Y%m%d"`.pdf
