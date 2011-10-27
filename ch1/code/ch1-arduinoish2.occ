@@ -1,0 +1,14 @@
+#INCLUDE "plumbing.module"
+
+VAL INT led.pin IS 13:
+
+PROC main ()
+  SEQ
+    digital.mode (led.pin, OUTPUT)
+    WHILE TRUE
+      SEQ
+        digital.write (led.pin, HIGH)
+        delay (1000)
+        digital.write (led.pin, LOW)
+        delay (1000)
+:
