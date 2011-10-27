@@ -21,3 +21,4 @@ clean:
 	rm -f *~
 	rm -f ${TEXSRC}.pdf
 	rm -f ${BOOKPDF}.pdf
+	rm -f ${BOOKPDF}-*.pdf
