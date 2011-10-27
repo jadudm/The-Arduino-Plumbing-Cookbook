@@ -1,7 +1,0 @@
-#INCLUDE "plumbing.module"
-
-VAL INT led.pin IS 13:
-
-PROC main ()
-  blink (led.pin, 1000)
-:
