@@ -7,17 +7,13 @@ all:
 
 upload:
 	cp ${TEXSRC}.pdf ${BOOKPDF}-`date +"%Y%m%d"`.pdf
-	# scp ${BOOKPDF} jadudm@unhosting.org:${DEST}
-
 
 clean:
 	rm -f *.aux
 	rm -f *.log
 	rm -f *.bbl
-	rm -f *.err
-	rm -f *.out
 	rm -f *.toc
-	rm -f *.py
+	rm -f *.out
 	rm -f *~
 	rm -f ${TEXSRC}.pdf
 	rm -f ${BOOKPDF}.pdf

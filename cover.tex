@@ -1,18 +1,20 @@
-\ 
+\newdateformat{Ymd}{\THEYEAR-\THEMONTH-\THEDAY}
+ 
 \vspace{-3cm}
 \fontsize{42}{42}\selectfont 
 \begin{center}
 \HRule \\
-Plumbing for \\
-the Arduino\vspace{-1cm}
+A Plumbing Cookbook \\
+for the Arduino\vspace{-1cm}
 \HRule
 \end{center}
 
 \normalsize
+\pagestyle{empty}
 
 \begin{figure}[bph]
   \begin{center}
-    \includegraphics[height=3.5in]{images/cover-light-fixture}
+    \includegraphics[width=0.8\linewidth]{images/juggling}
   \end{center}
 \end{figure}
 
@@ -28,11 +30,12 @@ the Arduino\vspace{-1cm}
 
 \begin{center}
 \vspace*{\fill}
-\begin{python}  
-	import time
-	import datetime
-	print 'Revision %s' % time.strftime("%Y-%m-%d")
-\end{python}
+%\begin{python}  
+%	import time
+%	import datetime
+%	print 'Revision %s' % time.strftime("%Y-%m-%d")
+%\end{python}
+Revision \Ymd\today
 \end{center}
 
 \vspace*{\fill}
