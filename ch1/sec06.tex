@@ -1,0 +1,70 @@
+\section{Structuring your Code with {\PROC}s}
+\problem
+Your code is getting a bit long, and you'd like to break it into smaller parts so you can make sense of it.
+
+\solution
+If you look back at Section~\vref{structuring-for-arduino}, we see the following program:
+
+\lstinputlisting[caption=A program waiting to be simplified.,label=code:arduinoish2]{ch1/code/ch1-arduinoish2.occ}
+
+The program has a \SEQ, which says to first set the direction of pin \pinthirteen to \OUTPUT, and then we fall into an infinite loop. Wouldn't it be nice if the code in the infinite loop was in a separate \PROC?
+
+After a bit of editing, we might end up with the following program:
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+VAL INT led.pin IS 13:
+
+PROC blink.loop ()
+  WHILE TRUE
+    SEQ
+      digital.write (led.pin, HIGH)
+      delay (1000)
+      digital.write (led.pin, LOW)
+      delay (1000)
+:
+
+PROC main ()
+  SEQ
+    digital.mode (led.pin, OUTPUT)
+    blink.loop ()
+:
+\end{lstlisting}
+
+We could take this one step further, and make it so we can easily change the amount of time that the LED is on or off:
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+VAL INT led.pin IS 13:
+
+PROC blink.loop (VAL INT delay.time)
+  WHILE TRUE
+    SEQ
+      digital.write (led.pin, HIGH)
+      delay (delay.time)
+      digital.write (led.pin, LOW)
+      delay (delay.time)
+:
+
+PROC main ()
+  SEQ
+    digital.mode (led.pin, OUTPUT)
+    blink.loop (1000)
+:
+\end{lstlisting}
+
+\discussion
+In C++, you write functions to organize your code into small, manageable pieces. (This is also how we often reuse parts of our code.) In \occam, we typically use the \PROC for the same purpose. A \PROC allows us to gather up one or more lines of code and give those lines of code a name. In this case, we took the infinite loop that was blinking pin \pinthirteen, and put it in a \PROC that we could reference by name.
+
+The second change we made was to add a parameter to the \PROC. This way, when we use the \PROC, we can choose how long to leave the LED on and off at the time of usage, instead of it being ``hard coded'' into the \PROC {\code blink.loop}. This also illustrates an interesting thing about \occam parameters: if we want to pass a constant value (that cannot be changed), we say \VAL. So, in the parameters to {\code blink.loop} we have one parameter of type \VAL \INT, which means that we are passing a constant of some sort to {\code blink.loop}.
+
+\makingthingsbreak
+\begin{itemize}
+	\item Try eliminating the keyword \VAL in the \PROC header for {\code blink.loop}.
+\end{itemize}
+
+\seealso
+
+\XXX

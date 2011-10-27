@@ -1,0 +1,42 @@
+\section{Using Different Types of Data}
+
+\problem
+You're used to using different types of data in other languages, so what can you use in \occam?
+
+
+\solution
+\occam is a programming language, and it has a full range of data types. You will often find yourself using integers (\INT), but there are a few others you might want to know about.
+
+
+	\begin{tabular}{l|c|c|p{1in}}
+		\hline
+		Type & Min & Max & Useage \\
+		\hline
+		\SIGNALT & & & A signal; no value. \\
+		\BOOL & FALSE & TRUE & Logical truth. \\
+		\BYTE & 0 & 255 & Single-byte values (small integers). \\
+		\INT & -32768 & 32767 & Positive and negative integer values. \\
+		\INTTT &  -2147483648 & 2147483647 & Big integers. \\
+		\REALTT & ... & ... & Floating-point values. \\
+		\hline
+	\end{tabular}
+
+\discussion
+In most of your programs, you will find yourself using data of type \SIGNALT, \BOOL, \BYTE, and \INT. For example, if you are reading from the analog to digital converter, you will get back an \INT, and if you are using a PWM \PROC (to fade an LED or drive a servo), you will probably be sending it a \BYTE. 
+
+You can use the larger types (the \INTTT and \REALTT types), but these are going to be very, very slow and memory intensive in Plumbing programs. Try, whenever possible, to avoid using them in your sketches. Usually, if you're clever, you can think of a way to solve your problem using only \INT values and not (say) floating-point \REALTT.
+
+Note that we can define new data types in \occam, and we often do so when it makes sense. For example, if we want to capture the $x$ and $y$ position of a joystick, we might write code like
+
+\begin{lstlisting}
+DATA TYPE POSITION
+  INT x:
+  INT y:
+:
+\end{lstlisting}
+
+This way, we can create a \emph{record} that contains both values, and use that throughout our program (instead of two separate values). You can read more about {\RECORD}s in \FIXME.
+
+\seealso
+
+\XXX

@@ -1,0 +1,50 @@
+\section{Using Mutable Arrays}
+\problem
+You want to store some values in an array, and those values will change over time.
+
+\solution
+You can't use a constant array for values that change over time; instead, you need to declare an array within a \PROC, so that it is \emph{mutable}, meaning ``able to be changed.''
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+PROC main ()
+  [6]INT readings:
+  INT sum:
+  SEQ
+    SEQ i = 0 FOR (SIZE readings)
+      adc.base (A0, VCC, readings[i])
+    SEQ i = 0 FOR (SIZE readings)
+      sum := sum + readings[i]
+    serial.write.string (TX0, "Sum of readings: ")
+    serial.write.int (TX0, sum)
+:
+\end{lstlisting}
+
+\discussion
+On line 4, we declare an array of size 6 called {\code readings}. In \occam programs, you will always need to declare how large an array is, and you can never change the size of the array after it is declared. Note that if you try and read from an array before you write data into it, you are likely to crash your \occam program, and the compiler will warn you if you try and do this.
+
+On line 7, we see the equivalent of a {\code for} loop in \occam: it is called a \emph{replicated \SEQ}. Instead of writing 
+
+\begin{lstlisting}
+  SEQ i = 0 FOR 6
+\end{lstlisting}
+
+we instead wrote 
+
+\begin{lstlisting}
+  SEQ i = 0 FOR (SIZE readings)
+\end{lstlisting}
+
+which makes sure we don't loop too many times and walk off the end of the array. Also, it means that if we change the size of the array later, then our code will still work.
+
+\makingthingsbreak
+\begin{itemize}
+	\item What happens if you replace {\code (SIZE readings}) with {\constant 7}?
+	\item What happens if you forget the {\code [i]} on either line 8 or line 10?
+	\item What happens if you forget the {\code TX0} when printing data back to your PC?
+\end{itemize}
+
+\seealso
+
+\XXX

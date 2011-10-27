@@ -1,0 +1,47 @@
+\section{Displaying Messages}
+\problem
+You want to tell a story from your Arduino, so you need to be able to print things back to your PC.
+
+\solution
+\occam has some really awful string handling. And, let us be honest with each-other: you're programming an embedded system, not the next great text adventure. Why are you trying to print so much?
+
+When you are working with ``strings'' in \occam, the truth is you're just working with arrays of \BYTE values. And, because \occam was designed for embedded systems, it doesn't casually do things like ``add two strings together.'' If you are accustomed to working with the Arduino in C++, you may be in for some rude surprises with \occam. 
+
+That said, we can do some basic things. We can print a message back to the serial port (which is typically connected to our PC):
+
+\begin{lstlisting}
+serial.write.string (TX0, "Hello*n")
+\end{lstlisting}
+
+The {\code *n} is how we indicate a newline in a string. 
+
+We can print an integer to the serial port:
+
+\begin{lstlisting}
+serial.write.int (TX0, 42)
+\end{lstlisting}
+
+We can write a single byte:
+
+\begin{lstlisting}
+serial.write.byte (TX0, 'A')
+\end{lstlisting}
+
+And we can send a newline all by itself to the serial port:
+
+\begin{lstlisting}
+serial.write.newline (TX0)
+\end{lstlisting}
+
+\discussion
+Back in our day, programmers didn't need strings---they would read and write their data and programs in straight binary, and they \emph{liked it}.
+
+Humor aside, we get on just fine with this level of serial functionality. If you want to do more, and it isn't currently part of the Plumbing libraries, we recommend you join the users mailing list ({\code users@concurrency.cc}) and ask for help with what you are trying to accomplish. The \occam gurus who hang out there will do their best to help you achieve your goals.
+
+\makingthingsbreak
+
+\XXX
+
+\seealso
+
+\XXX

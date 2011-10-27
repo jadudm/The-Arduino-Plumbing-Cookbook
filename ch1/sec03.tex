@@ -1,0 +1,56 @@
+\section{Working with Constant Arrays}
+\problem
+You want to create an array of data so you can reference it using an index (either in a replicated construct or as part of a lookup table). 
+
+\solution
+\occam has arrays just like any other language; they come in two flavors: constant and mutable. A constant array can be used to easily package up a group of values to be referenced in a simple and direct manner.
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+VAL []INT pins IS [10, 11, 12, 13]:
+
+PROC main ()
+  PAR i = 0 FOR 4
+    blink (pins[i], 100 * (i + 1))
+:
+\end{lstlisting}
+
+In this example, we declare a constant array of {\INT}s. We know it is a constant array because 1) it is at the ``top level'' (meaning it is not in a \PROC), and 2) because the line of code begins with the keyword \VAL. Note that unlike C++, the array subscript comes before the type (eg. {\code []\INT}) when you are declaring the array.
+
+On line 7, we see how the array is referenced; it is called {\code pins}, and we want the {\code i}$^{th}$ element of the array. On line 6, we see something that is unique to \occam: we don't just have loops so much as \emph{replicators}. Here, we say that we want to replicate the \PAR four times, which makes the above code the same as writing
+
+\begin{lstlisting}
+#INCLUDE "plumbing.module"
+
+VAL []INT pins IS [10, 11, 12, 13]:
+
+PROC main ()
+  PAR
+    blink (pins[0], 100 * (0 + 1))
+    blink (pins[1], 100 * (1 + 1))
+    blink (pins[2], 100 * (2 + 1))
+    blink (pins[3], 100 * (3 + 1))
+:
+\end{lstlisting}
+
+This will blink four LED pins at four different rates.
+
+\discussion
+
+\occam constant arrays can be of any type; for example, we can have a constant array of \BOOL values, or \REALTT values. They are useful for data that does not change throughout your program. 
+
+You cannot change the values contained within a constant array. For that, you need to use an array that is declared locally within a \PROC. This is a safety feature of the language, as we will soon learn.
+
+\makingthingsbreak
+
+\begin{itemize}
+	\item Try removing the colon from the declaration of the array.
+	\item What happens if you forget the keyword \VAL?
+	\item What happens if you forget a comma when specifying the contents of the array?
+	\item What if you forget the brackets on the {\code []\INT}?
+\end{itemize}
+
+\seealso
+
+\XXX
