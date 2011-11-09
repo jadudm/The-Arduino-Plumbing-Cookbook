@@ -21,6 +21,12 @@ We can print an integer to the serial port:
 serial.write.int (TX0, 42)
 \end{lstlisting}
 
+However, that shows the value in hexidecimal, which is loved by computer scientists and disliked by just about everyone else. For this reason, we also have a routine that lets you print out numbers as... well, as numbers. Specifically, numbers expressed in base 10, or decimal.
+
+\begin{lstlisting}
+serial.write.dec.int (TX0, 42)
+\end{lstlisting}
+
 We can write a single byte:
 
 \begin{lstlisting}
